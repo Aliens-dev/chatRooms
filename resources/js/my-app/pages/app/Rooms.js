@@ -8,6 +8,7 @@ import {setToastMessage, setToastShowAction} from "../../context/actions/GlobalA
 import {DASHBOARD_PAGE, PROFILE_PAGE_API, ROOMS_PAGE_API} from "../../urls/AppBaseUrl";
 
 const Rooms = (props) => {
+
     const { auth, dispatchGlobalState } = useContext(AppContext);
     const [ rooms, setRooms ] = useState([]);
     const [loading,setLoading] = useState(true);

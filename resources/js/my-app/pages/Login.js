@@ -27,6 +27,7 @@ const Login = (props) => {
                     setCheck(true)
                 })
                 .catch(err => {
+                    console.log('Error')
                     setCheck(true)
                     localStorage.setItem('chatApp', JSON.stringify({}));
                     dispatchAuth({type : 'USER_LOGOUT'})
@@ -41,6 +42,7 @@ const Login = (props) => {
         axios.post(LOGIN_PAGE_API, {email,password})
             .then(res => {
                 if(res.data.success) {
+                    console.log(res.data.data)
                     localStorage.setItem('chatApp',JSON.stringify(res.data.data));
                     dispatchAuth({type: 'USER_LOGIN', payload: res.data.data});
                     props.history.push(APP_URL)

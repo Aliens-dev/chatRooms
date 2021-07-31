@@ -16,12 +16,6 @@ const SidebarContainer = () => {
         <Sidebar type={globalState.sidebarClass}>
             <Sidebar.Header><span>CR</span><span>-AliensDev</span></Sidebar.Header>
             <Sidebar.Menu>
-                <Sidebar.Item to={DASHBOARD_PAGE}>
-                    <div>
-                        <i className="fas fa-tachometer-alt" />
-                    </div>
-                    <span>Dashboard</span>
-                </Sidebar.Item>
                 <Sidebar.Item to={ROOMS_PAGE}>
                     <div>
                         <i  className="far fa-comments"/>

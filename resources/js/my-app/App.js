@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from "./routes";
-import {AppProvider} from "./context/AppContext";
+import { AppProvider } from "./context/AppContext";
 
 const App = () => {
     return (

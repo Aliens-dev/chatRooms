@@ -81,7 +81,6 @@ class RoomController extends ApiController
      */
     public function show($id)
     {
-
         $room = Room::find($id);
         if(is_null($room)) {
             return $this->ErrorResponse();
@@ -105,6 +104,7 @@ class RoomController extends ApiController
     public function update(Request $request, Room $room)
     {
         $response = Gate::inspect('update', $room);
+
         if($response->denied()) {
             //return response()->json(['success' => false], 401);
             return $this->ErrorResponse();

@@ -2,7 +2,6 @@ import React from 'react';
 import {Switch, Route, useRouteMatch} from 'react-router-dom';
 import Rooms from "../pages/app/Rooms";
 import SingleRoom from "../pages/app/Room/SingleRoom";
-import Dashboard from "../pages/app/Dashboard";
 import PublicRooms from "../pages/app/PublicRooms";
 import JoinedRooms from "../pages/app/JoinedRooms";
 import NotFound from "../pages/app/NotFound";
@@ -16,15 +15,15 @@ const AppRoutes = () => {
     const { path } = useRouteMatch();
     return (
         <Switch>
-            <PrivateRoutes path={DASHBOARD_PAGE} exact component={Dashboard}/>
-            <PrivateRoutes path={PUBLIC_ROOMS_PAGE} exact component={PublicRooms} />
-            <PrivateRoutes path={JOINED_ROOMS_PAGE} exact component={JoinedRooms} />
-            <PrivateRoutes path={PROFILE_PAGE} exact component={MyProfile} />
-            <PrivateRoutes path={ROOMS_PAGE} exact component={Rooms} />
-            <PrivateRoutes path={ROOMS_PAGE+'add'} component={AddRoom} />
-            <PrivateRoutes path={ROOMS_PAGE+':id/edit'} component={EditRoom} />
-            <PrivateRoutes path={ROOMS_PAGE+':id'} component={SingleRoom} />
-            <PrivateRoutes path="*" component={NotFound}/>
+            <Route path="/" exact component={Rooms} />
+            <Route path={PUBLIC_ROOMS_PAGE} exact component={PublicRooms} />
+            <Route path={JOINED_ROOMS_PAGE} exact component={JoinedRooms} />
+            <Route path={PROFILE_PAGE} exact component={MyProfile} />
+            <Route path={ROOMS_PAGE} exact component={Rooms} />
+            <Route path={ROOMS_PAGE+'add'} component={AddRoom} />
+            <Route path={ROOMS_PAGE+':id/edit'} component={EditRoom} />
+            <Route path={ROOMS_PAGE+':id'} component={SingleRoom} />
+            <Route path="*" component={NotFound}/>
         </Switch>
     )
 }
