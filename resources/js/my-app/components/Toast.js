@@ -1,10 +1,7 @@
-import React,{useContext} from 'react';
-import {AppContext} from "../context/AppContext";
-import {setToastHiddenAction, setToastShowAction} from "../context/actions/GlobalActions";
+import React from 'react';
+
 
 const MyToast = (props) => {
-
-    const {globalState,dispatchGlobalState} = useContext(AppContext)
 
     const hideToast =() => {
         dispatchGlobalState(setToastHiddenAction())

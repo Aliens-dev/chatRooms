@@ -1,58 +1,36 @@
-import React,{ useContext,useState,useEffect } from 'react';
+import React,{ useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import {AppContext} from "../context/AppContext";
-import axios from 'axios';
-import {UserLoginAction, UserLogoutAction} from "../context/actions/AuthActions";
 import {Loading} from "../components";
 import {LOGIN_PAGE} from "../urls/AppBaseUrl";
+import {useDispatch, useSelector} from "react-redux";
+import {CHECK_AUTH} from "../actions/authActions";
 
 
-const PrivateRoutes = (props) => {
-    const {auth,dispatchAuth} = useContext(AppContext);
-    const [check,setCheck] = useState(false);
+const PrivateRoutes = ({component,path, ...restProps}) => {
+
+    const authState = useSelector(state => state.auth)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if(auth.token) {
-            axios.post('/api/checkToken', [],{
-                headers : {
-                    Authorization : 'bearer ' + auth.token,
-                }
-            })
-                .then(res => {
-                    if(res.data.success && res.data.status === 'refresh') {
-                        localStorage.setItem('chatApp', JSON.stringify(res.data.data));
-                        dispatchAuth(UserLoginAction(res.data.data))
-                    }
-                    setCheck(true)
-                })
-                .catch(err => {
-                    localStorage.setItem('chatApp', JSON.stringify({}));
-                    dispatchAuth(UserLogoutAction());
-                    setCheck(true)
-                })
-        }else {
-            dispatchAuth(UserLogoutAction())
-            setCheck(true);
-        }
+        dispatch(CHECK_AUTH())
     },[])
 
-    if(!check) {
+    if(authState.loading) {
         return (
             <Loading>
                 <Loading.Large />
             </Loading>
         )
-    }else {
-        if( !auth.token ) {
-            return (
-                <Redirect to={LOGIN_PAGE} />
-            )
-        }else {
-            return (
-                <Route path={props.path} exact={props.exact} component={props.component}/>
-            )
-        }
     }
+
+    if( !authState.loginSuccess ) {
+        return (
+            <Redirect to={LOGIN_PAGE}/>
+        )
+    }
+    return (
+        <Route path={path} {...restProps} component={component}/>
+    )
 }
 
 export default PrivateRoutes;

@@ -1,19 +1,15 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { Sidebar } from '../components';
 import {
-    DASHBOARD_PAGE,
     JOINED_ROOMS_PAGE, PROFILE_PAGE,
     PUBLIC_ROOMS_PAGE,
     ROOMS_PAGE
 } from "../urls/AppBaseUrl";
-import {AppContext} from "../context/AppContext";
-
 
 const SidebarContainer = () => {
-    const { _Logout,globalState,dispatchGlobalState } = useContext(AppContext);
 
     return (
-        <Sidebar type={globalState.sidebarClass}>
+        <Sidebar type="sidebar">
             <Sidebar.Header><span>CR</span><span>-AliensDev</span></Sidebar.Header>
             <Sidebar.Menu>
                 <Sidebar.Item to={ROOMS_PAGE}>
@@ -40,7 +36,7 @@ const SidebarContainer = () => {
                     </div>
                     <span>Profile</span>
                 </Sidebar.Item>
-                <Sidebar.Item to="#" onClick={_Logout}>
+                <Sidebar.Item to="#" >
                     <div>
                         <i className="fas fa-sign-out-alt" />
                     </div>
